@@ -1,0 +1,9 @@
+[submodule "tgbot"]
+	path = tgbot
+	url = https://github.com/BoardGameAssistant/tgbot.git
+[submodule "gameClassifier"]
+	path = gameClassifier
+	url = https://github.com/BoardGameAssistant/GameClassifier.git
+[submodule "checkers"]
+	path = checkers
+	url = https://github.com/BoardGameAssistant/checkers.git

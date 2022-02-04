@@ -6,6 +6,7 @@ from telegram.ext import CallbackContext, CommandHandler, MessageHandler, Filter
 updater = None
 dispatcher = None
 classifyGame = None
+detect_checkers = None
 
 
 def send_message(bot, chat_id, text):
@@ -21,28 +22,36 @@ def image_handler(update: Update, context: CallbackContext):
     if update.message.document is not None:
         image_id = update.message.document.file_id
     elif update.message.photo != []:
-        image_id = update.message.photo[0].file_id
+        image_id = update.message.photo[len(update.message.photo) - 1].file_id
 
     if image_id is not None:
         obj = context.bot.get_file(image_id)
         obj.download('image.png')
-        if classifyGame is not None:
-            send_message(context.bot, update.effective_chat.id, 'This is a "' + classifyGame('image.png') + '" game!')
-        else:
-            send_message(context.bot, update.effective_chat.id, 'Game classifier function is not specified')
+
+        game_type = classifyGame('image.png')
+        send_message(context.bot, update.effective_chat.id, 'This is a "' + game_type + '" game!')
+        if game_type == 'checkers':
+            try:
+                send_message(context.bot, update.effective_chat.id, 'Analyzing checkers game field...')
+                detect_checkers('image.png', update.effective_chat.id)
+            except:
+                send_message(context.bot, update.effective_chat.id, 'Analyzing failed!')
     else:
         send_message(context.bot, update.effective_chat.id, 'The error has occured')
 
 
-def initBot(token=None, classifyGameFunction=None):
+def initBot(token=None, classifyGameFunction=None, detect_checkersFunction=None):
     global updater
     global dispatcher
     global classifyGame
+    global detect_checkers
+
     if token is None:
         print('Please specify telegram bot token')
         return
 
     classifyGame = classifyGameFunction
+    detect_checkers = detect_checkersFunction
 
     updater = Updater(token=token, use_context=True)
 
@@ -51,6 +60,7 @@ def initBot(token=None, classifyGameFunction=None):
     dispatcher.add_handler(MessageHandler((Filters.document.image | Filters.photo) & (~Filters.command), image_handler))
 
     updater.start_polling()
+    return updater.bot
 
 
 def stopBot():
@@ -59,12 +69,3 @@ def stopBot():
         print('Bot has stopped')
     else:
         print('Bot was already stopped')
-
-
-if __name__ == '__main__':
-    CONFIG_PATH = "config.json"
-    with open(CONFIG_PATH) as f:
-        config = json.load(f)
-
-    BOT_TOKEN = config['TG_BOT_KEY']
-    initBot(token=BOT_TOKEN)

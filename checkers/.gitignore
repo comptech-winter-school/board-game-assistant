@@ -1,0 +1,13 @@
+/*.jpg
+/*.pt
+/debug
+/dataset
+/__pycache__
+/NotMine
+/rofl
+/tmp.py
+/training.py
+/wrapper.ipynb
+/*.png
+/play.py
+.DS_Store
