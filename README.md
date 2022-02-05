@@ -72,7 +72,7 @@ prefix: /CT22/game-board-assistant/BoardGame
 
 ## Использование
 
-Подробное описание в Руководстве пользователя
+Подробное описание в [Руководстве пользователя](https://github.com/comptech-winter-school/board-game-assistant/blob/main/docs/User%20guide.md)
 
 ## Дополнительно
 
