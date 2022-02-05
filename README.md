@@ -56,7 +56,19 @@ Board game assistant — твой персональный помощник в �
 
 ### Зависимости
 
-// используемые библиотеки, требования к ПО
+name: Boardgame
+channels:
+  - defaults
+  - fastai
+dependencies:
+  - fastai=2.5.3
+  - pip
+  - pip:
+    - pygame
+    - opencv-python==4.5.5.62
+    - seaborn==0.11.2
+    - python-telegram-bot==13.10
+prefix: /CT22/game-board-assistant/BoardGame
 
 ## Использование
 
