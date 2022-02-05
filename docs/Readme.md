@@ -2,10 +2,10 @@
 
 На портале представлен комплект документации проекта «Board Game Assistant» для оценки работы технического писателя Бучкиной Ольги, а именно артефакты:
 
-- Техническое задание;
-- Руководство пользователя.
+- [Техническое задание](https://github.com/comptech-winter-school/board-game-assistant/blob/main/docs/TZ.md);
+- [Руководство пользователя](https://github.com/comptech-winter-school/board-game-assistant/blob/main/docs/User%20guide.md).
 
-README-файл расположен в корневой папке репозитория «Board Game Assistant».
+[README-файл](https://github.com/comptech-winter-school/board-game-assistant#readme) расположен в корневой папке репозитория «Board Game Assistant».
 
 Ниже приведено описание концепции Продукта.
 
