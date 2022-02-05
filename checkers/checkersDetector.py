@@ -286,19 +286,19 @@ class CheckersDetector():
 
         resWhite, resBlack = self._getSuggestions(field,grid,img,roll)
 
+        a,_, = checkers.shape
+        for i in range(a):
+            if checkers[i][4] == 1 :
+                color = (255,0,0)
+            else:
+                color = (0,0,255)
+            cv2.rectangle(img, (np.int32(checkers[i][0]),np.int32(checkers[i][1])),(np.int32(checkers[i][2]),np.int32(checkers[i][3])), color = color)
+        for j in range(len(grid)):
+            color = (np.random.randint(0,255),np.random.randint(0,255),np.random.randint(0,255))
+            for i in range(len(grid[j])):
+                cv2.circle(img, (np.int32(grid[j][i][0]),np.int32(grid[j][i][1])), radius=4, color=color, thickness=-1)   
+
         if self.debug:
-            a,_, = checkers.shape
-            for i in range(a):
-                if checkers[i][4] == 1 :
-                    color = (255,0,0)
-                else:
-                    color = (0,0,255)
-                cv2.rectangle(img, (np.int32(checkers[i][0]),np.int32(checkers[i][1])),(np.int32(checkers[i][2]),np.int32(checkers[i][3])), color = color)
-            for j in range(len(grid)):
-                color = (np.random.randint(0,255),np.random.randint(0,255),np.random.randint(0,255))
-                for i in range(len(grid[j])):
-                    cv2.circle(img, (np.int32(grid[j][i][0]),np.int32(grid[j][i][1])), radius=4, color=color, thickness=-1)   
-                
             cv2.imwrite(self.debugOutputPath + "\\"+str(self.counter) + ".jpg",img)
             self.counter += 1
         
